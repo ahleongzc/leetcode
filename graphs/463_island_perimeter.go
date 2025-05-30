@@ -16,7 +16,6 @@ func IslandPerimeterDFS(grid [][]int) int {
 			return 1
 		}
 
-		grid[row][col] = 0
 		visited[[2]int{row, col}] = true
 
 		sum := 0
