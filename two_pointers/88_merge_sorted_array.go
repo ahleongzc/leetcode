@@ -4,6 +4,7 @@ func Merge(nums1 []int, m int, nums2 []int, n int) {
 	// TIP: Start from the back to prevent overriding the one at the front
 	// A = [4, 5, 6, 0, 0, 0]
 	// B = [1, 2, 3]
+
 	endNumsOne := m - 1
 	endNumsTwo := n - 1
 	endIndex := m + n - 1

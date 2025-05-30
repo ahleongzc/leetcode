@@ -1,7 +1,5 @@
 package binarysearch
 
-// 1 	2 	3 	4
-
 func Search(nums []int, target int) int {
 	start := 0
 	end := len(nums) - 1
