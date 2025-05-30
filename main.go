@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	_ "leetcode/helper"
-	twopointers "leetcode/two_pointers"
+	graphs "leetcode/graphs"
 )
 
 func main() {
-	str := "ABCA"
-	fmt.Println(twopointers.ValidPalindromeTwo(str))
+	grid := [][]int{{0,1,0,0},{1,1,1,0},{0,1,0,0},{1,1,0,0}}
+
+	fmt.Println(graphs.IslandPerimeter(grid))
 }
