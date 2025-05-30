@@ -1,5 +1,44 @@
 package graphs
 
+func IslandPerimeterDFS(grid [][]int) int {
+	perimeter := 0
+	num_rows := len(grid)
+	num_cols := len(grid[0])
+	visited := make(map[[2]int]bool)
+
+	var dfs func(row, col int) int
+	dfs = func(row, col int) int {
+		if _, ok := visited[[2]int{row, col}]; ok {
+			return 0
+		}
+
+		if row < 0 || col < 0 || row == num_rows || col == num_cols || grid[row][col] == 0 {
+			return 1
+		}
+
+		grid[row][col] = 0
+		visited[[2]int{row, col}] = true
+
+		sum := 0
+		sum += dfs(row + 1, col)
+		sum += dfs(row - 1, col)
+		sum += dfs(row, col + 1)
+		sum += dfs(row, col - 1)
+
+		return sum
+	}
+
+	for row := range num_rows {
+		for col := range num_cols {
+			if grid[row][col] == 1 {
+				perimeter += dfs(row, col)
+			}
+		}
+	}
+
+	return perimeter
+}
+
 func IslandPerimeterIteration(grid [][]int) int {
 	perimeter := 0
 	directions := [][]int{{0, 1}, {1, 0}, {0, -1}, {-1, 0}}
