@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	graphs "leetcode/graphs"
+	backtracking "leetcode/backtracking"
 )
 
 func main() {
-	fmt.Println(graphs.OpenLock([]string{}, "0008"))
+	fmt.Println(backtracking.Subsets([]int{1, 2, 3}))
 }

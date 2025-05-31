@@ -16,6 +16,7 @@ func GoodNodes(root *TreeNode) int {
 		if node.Val >= prev {
 			res++
 		}
+
 		dfs(node.Left, max(node.Val, prev))
 		dfs(node.Right, max(node.Val, prev))
 	}
