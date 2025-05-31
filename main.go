@@ -2,17 +2,13 @@ package main
 
 import (
 	"fmt"
+	graphs "leetcode/graphs"
 )
 
 func main() {
-	nums := []int{-21, 10, 17, 8, 4, 26, 5, 35, 33, -7, -16, 27, -12, 6, 29, -12, 5, 9, 20, 14, 14, 2, 13, -24, 21, 23, -21, 5}
-	countMap := make(map[int]bool)
+	edges := []int{2, 2, 3, -1}
+	fmt.Println(graphs.ClosestMeetingNode(edges, 0, 1))
 
-	for _, num := range nums {
-		if _, ok := countMap[num]; ok {
-			fmt.Println("duplicate", num)
-		}
-
-		countMap[num] = true
-	}
+	edges = []int{1, 2, -1}
+	fmt.Println(graphs.ClosestMeetingNode(edges, 0, 2))
 }
