@@ -2,8 +2,8 @@ package graphs
 
 func IslandPerimeterDFS(grid [][]int) int {
 	perimeter := 0
-	num_rows := len(grid)
-	num_cols := len(grid[0])
+	numRows := len(grid)
+	numCols := len(grid[0])
 	visited := make(map[[2]int]bool)
 
 	var dfs func(row, col int) int
@@ -12,7 +12,7 @@ func IslandPerimeterDFS(grid [][]int) int {
 			return 0
 		}
 
-		if row < 0 || col < 0 || row == num_rows || col == num_cols || grid[row][col] == 0 {
+		if row < 0 || col < 0 || row == numRows || col == numCols || grid[row][col] == 0 {
 			return 1
 		}
 
@@ -27,8 +27,8 @@ func IslandPerimeterDFS(grid [][]int) int {
 		return sum
 	}
 
-	for row := range num_rows {
-		for col := range num_cols {
+	for row := range numRows {
+		for col := range numCols {
 			if grid[row][col] == 1 {
 				perimeter += dfs(row, col)
 			}
@@ -41,17 +41,17 @@ func IslandPerimeterDFS(grid [][]int) int {
 func IslandPerimeterIteration(grid [][]int) int {
 	perimeter := 0
 	directions := [][]int{{0, 1}, {1, 0}, {0, -1}, {-1, 0}}
-	num_rows := len(grid)
-	num_cols := len(grid[0])
+	numRows := len(grid)
+	numCols := len(grid[0])
 
 	var getPerimeter = func(row, col int) int {
 		p := 0
 
 		for _, direction := range directions {
-			new_row := row + direction[0]
-			new_col := col + direction[1]
+			newRow := row + direction[0]
+			newCol := col + direction[1]
 
-			if new_row < 0 || new_row == num_rows || new_col < 0 || new_col == num_cols || grid[new_row][new_col] == 0 {
+			if newRow < 0 || newRow == numRows || newCol < 0 || newCol == numCols || grid[newRow][newCol] == 0 {
 				p++
 			}
 		}
@@ -59,8 +59,8 @@ func IslandPerimeterIteration(grid [][]int) int {
 		return p
 	}
 
-	for row := range num_rows {
-		for col := range num_cols {
+	for row := range numRows {
+		for col := range numCols {
 			if grid[row][col] == 1 {
 				perimeter += getPerimeter(row, col)
 			}

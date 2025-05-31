@@ -2,8 +2,8 @@ package graphs
 
 func NumIslandBFS(grid [][]byte) int {
 	num := 0
-	num_rows := len(grid)
-	num_cols := len(grid[0])
+	numRows := len(grid)
+	numCols := len(grid[0])
 	directions := [][]int{{0, 1}, {1, 0}, {0, -1}, {-1, 0}}
 
 	var bfs = func(row, col int) {
@@ -16,25 +16,25 @@ func NumIslandBFS(grid [][]byte) int {
 			queue = queue[1:]
 
 			for _, val := range directions {
-				delta_x := val[0]
-				delta_y := val[1]
+				deltaX := val[0]
+				deltaY := val[1]
 
-				new_x := delta_x + element[0]
-				new_y := delta_y + element[1]
+				newX := deltaX + element[0]
+				newY := deltaY + element[1]
 				
 
-				if new_x < 0 || new_x == num_rows || new_y < 0 || new_y == num_cols || grid[new_x][new_y] == byte('0') {
+				if newX < 0 || newX == numRows || newY < 0 || newY == numCols || grid[newX][newY] == byte('0') {
 					continue
 				}
 
-				grid[new_x][new_y] = byte('0')
-				queue = append(queue, []int{new_x, new_y})
+				grid[newX][newY] = byte('0')
+				queue = append(queue, []int{newX, newY})
 			}
 		}
 	}
 
-	for row := range num_rows {
-		for col := range num_cols {
+	for row := range numRows {
+		for col := range numCols {
 			if grid[row][col] == byte('1') {
 				bfs(row, col)
 				num++
@@ -47,12 +47,12 @@ func NumIslandBFS(grid [][]byte) int {
 
 func NumIslandsDFS(grid [][]byte) int {
 	num := 0
-	num_rows := len(grid)
-	num_cols := len(grid[0])
+	numRows := len(grid)
+	numCols := len(grid[0])
 
 	var dfs func(row, col int)
 	dfs = func(row, col int) {
-		if row < 0 || row == num_rows || col < 0 || col == num_cols || grid[row][col] == byte('0') {
+		if row < 0 || row == numRows || col < 0 || col == numCols || grid[row][col] == byte('0') {
 			return
 		}
 
@@ -63,8 +63,8 @@ func NumIslandsDFS(grid [][]byte) int {
 		dfs(row, col-1)
 	}
 
-	for row := range num_rows {
-		for col := range num_cols {
+	for row := range numRows {
+		for col := range numCols {
 			if grid[row][col] == byte('1') {
 				dfs(row, col)
 				num++
