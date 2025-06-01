@@ -1,27 +1,28 @@
 package linkedlist
 
-type Node struct {
+type doubleLinkedNode struct {
 	// The reason to store the key is when removing from the map, you need to reference the key
+	// You need a doubly linked list because when removing from the middle of the list, it can be an O(1) operation compared to a singly linked list
 	key, value int
-	prev, next *Node
+	prev, next *doubleLinkedNode
 }
 
 type LRUCache struct {
 	// This maps a key to the address of the double linked list
-	nodeMap  map[int]*Node
-	head     *Node
-	tail     *Node
+	nodeMap  map[int]*doubleLinkedNode
+	head     *doubleLinkedNode
+	tail     *doubleLinkedNode
 	capacity int
 }
 
 func Constructor(capacity int) LRUCache {
-	headNode := &Node{}
-	tailNode := &Node{}
+	headNode := &doubleLinkedNode{}
+	tailNode := &doubleLinkedNode{}
 	headNode.next = tailNode
 	tailNode.prev = headNode
 
 	return LRUCache{
-		nodeMap:  make(map[int]*Node),
+		nodeMap:  make(map[int]*doubleLinkedNode),
 		head:     headNode,
 		tail:     tailNode,
 		capacity: capacity,
@@ -50,12 +51,12 @@ func (this *LRUCache) Put(key int, value int) {
 
 	// Evict the least recently used
 	if len(this.nodeMap) == this.capacity {
-		LRU := this.head.next
-		this.removeNode(LRU)
-		delete(this.nodeMap, LRU.key)
+		lru := this.head.next
+		this.removeNode(lru)
+		delete(this.nodeMap, lru.key)
 	}
 
-	node = &Node{
+	node = &doubleLinkedNode{
 		key:   key,
 		value: value,
 	}
@@ -63,12 +64,12 @@ func (this *LRUCache) Put(key int, value int) {
 	this.nodeMap[key] = node
 }
 
-func (this *LRUCache) removeNode(node *Node) {
+func (this *LRUCache) removeNode(node *doubleLinkedNode) {
 	node.prev.next = node.next
 	node.next.prev = node.prev
 }
 
-func (this *LRUCache) moveToMostRecent(node *Node) {
+func (this *LRUCache) moveToMostRecent(node *doubleLinkedNode) {
 	node.next = this.tail
 	node.prev = this.tail.prev
 
