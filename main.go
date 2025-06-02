@@ -4,9 +4,10 @@ import (
 	"fmt"
 	_ "leetcode/backtracking"
 	_ "leetcode/linked_list"
-	twopointers "leetcode/two_pointers"
+	_ "leetcode/two_pointers"
+	stack "leetcode/stack"
 )
 
 func main() {
-	fmt.Println(twopointers.LengthOfLongestSubstring("anna"))
+	fmt.Println(stack.SimplifyPath("/../"))
 }
