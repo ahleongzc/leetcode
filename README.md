@@ -1,1 +1,1 @@
-**Practice Link**: https://neetcode.io/practice?tab=neetcode250
+**Practice Link**: https://neetcode.io/practice
