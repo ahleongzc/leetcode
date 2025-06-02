@@ -18,6 +18,6 @@ func ReverseString(s string) string {
 	return string(runes)
 }
 
-func RemoveRuneFromString(s string, i int) string{
+func RemoveRuneFromString(s string, i int) string {
 	return s[:i] + s[i+1:]
 }

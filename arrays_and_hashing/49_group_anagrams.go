@@ -12,7 +12,7 @@ func GroupAnagramsOptimised(strs []string) [][]string {
 	for _, str := range strs {
 		arr := [26]int{}
 		for _, c := range str {
-			arr[c % 26]++
+			arr[c%26]++
 		}
 
 		m[arr] = append(m[arr], str)
@@ -40,7 +40,7 @@ func GroupAnagrams(strs []string) [][]string {
 
 	for _, indexes := range m {
 		arr := make([]string, 0)
-		for _, index := range indexes{
+		for _, index := range indexes {
 			arr = append(arr, strs[index])
 		}
 		res = append(res, arr)

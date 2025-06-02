@@ -3,7 +3,7 @@ package trees
 func PostorderTraversal(root *TreeNode) []int {
 	values := make([]int, 0)
 
-	var dfs func(root *TreeNode) 
+	var dfs func(root *TreeNode)
 	dfs = func(root *TreeNode) {
 		if root == nil {
 			return

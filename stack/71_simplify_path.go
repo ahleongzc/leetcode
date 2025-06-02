@@ -9,6 +9,7 @@ func SimplifyPath(path string) string {
 		return path
 	}
 
+	// After splitting, you have to take care of "" case such as: ////
 	splittedPath := strings.Split(path, "/")
 	stack := make([]string, 0)
 

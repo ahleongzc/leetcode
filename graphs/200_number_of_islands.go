@@ -21,7 +21,6 @@ func NumIslandBFS(grid [][]byte) int {
 
 				newX := deltaX + element[0]
 				newY := deltaY + element[1]
-				
 
 				if newX < 0 || newX == numRows || newY < 0 || newY == numCols || grid[newX][newY] == byte('0') {
 					continue

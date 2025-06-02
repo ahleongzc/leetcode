@@ -10,7 +10,7 @@ func HasCycleFloydCycleDetection(head *ListNode) bool {
 
 	for hare != nil && hare.Next != nil {
 		tortoise = tortoise.Next
-		hare = hare.Next.Next	
+		hare = hare.Next.Next
 
 		if tortoise == hare {
 			return true
@@ -21,7 +21,7 @@ func HasCycleFloydCycleDetection(head *ListNode) bool {
 }
 
 func HasCycle(head *ListNode) bool {
-	history := make(map[*ListNode]bool)	
+	history := make(map[*ListNode]bool)
 
 	for head != nil {
 		if _, ok := history[head]; ok {

@@ -25,7 +25,7 @@ func Merge(nums1 []int, m int, nums2 []int, n int) {
 		endNumsOne--
 		endIndex--
 	}
-	
+
 	for endNumsTwo >= 0 {
 		nums1[endIndex] = nums2[endNumsTwo]
 		endNumsTwo--

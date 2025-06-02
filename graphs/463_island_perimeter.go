@@ -19,10 +19,10 @@ func IslandPerimeterDFS(grid [][]int) int {
 		visited[[2]int{row, col}] = true
 
 		sum := 0
-		sum += dfs(row + 1, col)
-		sum += dfs(row - 1, col)
-		sum += dfs(row, col + 1)
-		sum += dfs(row, col - 1)
+		sum += dfs(row+1, col)
+		sum += dfs(row-1, col)
+		sum += dfs(row, col+1)
+		sum += dfs(row, col-1)
 
 		return sum
 	}

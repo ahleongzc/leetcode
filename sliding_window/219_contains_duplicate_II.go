@@ -5,10 +5,10 @@ func ContainNearbyDuplicates(nums []int, k int) bool {
 	i := 0
 
 	for j, num := range nums {
-		if j - i > k {
+		if j-i > k {
 			delete(countMap, nums[i])
 			i++
-		}	
+		}
 
 		if _, ok := countMap[num]; ok {
 			return true

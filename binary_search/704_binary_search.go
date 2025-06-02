@@ -5,7 +5,7 @@ func Search(nums []int, target int) int {
 	end := len(nums) - 1
 
 	for start <= end {
-		mid := (start +	end) / 2
+		mid := (start + end) / 2
 
 		if nums[mid] == target {
 			return mid

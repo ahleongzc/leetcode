@@ -10,23 +10,23 @@ func CalPoints(operations []string) int {
 
 	for _, op := range operations {
 		if op == "+" {
-			prevOne = stack[len(stack) - 1]
-			prevTwo = stack[len(stack) - 2]
-			stack = append(stack, prevOne + prevTwo)
+			prevOne = stack[len(stack)-1]
+			prevTwo = stack[len(stack)-2]
+			stack = append(stack, prevOne+prevTwo)
 			continue
 		}
 
 		if op == "C" {
-			stack = stack[:len(stack) - 1]
+			stack = stack[:len(stack)-1]
 			continue
 		}
 
 		if op == "D" {
-			prevOne = stack[len(stack) - 1]
-			stack = append(stack, prevOne * 2)
+			prevOne = stack[len(stack)-1]
+			stack = append(stack, prevOne*2)
 			continue
 		}
-	
+
 		val, _ := strconv.Atoi(op)
 		stack = append(stack, val)
 	}
@@ -34,6 +34,6 @@ func CalPoints(operations []string) int {
 	for _, val := range stack {
 		points += val
 	}
-	
+
 	return points
 }
