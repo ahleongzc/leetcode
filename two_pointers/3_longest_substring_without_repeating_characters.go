@@ -5,24 +5,18 @@ func LengthOfLongestSubstring(s string) int {
 		return len(s)
 	}
 
-	// Step 1: Initialization
-	length := 1
 	left := 0
-	right := 1
+	length := 0
+	set := make(map[byte]bool)
 
-	uniqueSet := make(map[byte]int)
-	uniqueSet[s[left]] = 0
-
-	// Step 2: Two pointers
-	for right < len(s) {
-		prevIndex, exists := uniqueSet[s[right]]
-		if exists && left <= prevIndex {
-			left = prevIndex + 1
+	for right := range len(s) {
+		for set[s[right]] {
+			delete(set, s[left])
+			left++
 		}
 
 		length = max(length, right-left+1)
-		uniqueSet[s[right]] = right
-		right++
+		set[s[right]] = true
 	}
 
 	return length
