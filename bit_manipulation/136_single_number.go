@@ -1,6 +1,6 @@
 package bitmanipulation
 
-func SingleNumber(nums[]int) int {
+func SingleNumber(nums []int) int {
 	if len(nums) == 1 {
 		return nums[0]
 	}
