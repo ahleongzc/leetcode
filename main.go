@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	oneddp "leetcode/1d_dynamic_programming"
+	_ "leetcode/1d_dynamic_programming"
 	_ "leetcode/arrays_and_hashing"
-	_ "leetcode/backtracking"
+	backtracking "leetcode/backtracking"
 	_ "leetcode/binary_search"
 	_ "leetcode/linked_list"
 	_ "leetcode/stack"
@@ -12,5 +12,5 @@ import (
 )
 
 func main() {
-	fmt.Println(oneddp.LengthOfLIS([]int{10, 9, 2, 5, 3, 7, 101, 18}))
+	fmt.Println(backtracking.CombinationSum([]int{2, 3, 5}, 8))
 }
