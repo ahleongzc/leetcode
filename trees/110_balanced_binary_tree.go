@@ -14,8 +14,8 @@ func IsBalanced(root *TreeNode) bool {
 
 		res := 0
 		if math.Abs(float64(nodeLeft[1]-nodeRight[1])) <= 1 &&
-			nodeLeft[0] == nodeRight[0] &&
-			nodeLeft[0] == 1 {
+			nodeLeft[0] == 1 &&
+			nodeRight[0] == 1 {
 			res = 1
 		}
 

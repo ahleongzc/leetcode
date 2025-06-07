@@ -1,5 +1,7 @@
-default: fmt
+default: run
 
 fmt:
 	@go fmt ./...
-	@echo "files formatted"
+
+run: fmt
+	@go run main.go
