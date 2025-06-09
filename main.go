@@ -11,5 +11,5 @@ import (
 )
 
 func main() {
-	fmt.Println(arrays_and_hashing.MaxProfit([]int{7, 1, 5, 3, 6, 4}))
+	fmt.Println(arrays_and_hashing.SortArray([]int{2, 1, 3, 4, 5}))
 }
