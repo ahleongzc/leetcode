@@ -6,4 +6,5 @@
 3. Patience (Solitaire) Sort
 
 **Revisit for follow up question**
-75. Sort Colors
+75. Sort Colors - counting sort
+215. Kth Largest Element In An Array - quick select
