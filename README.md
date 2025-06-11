@@ -8,3 +8,4 @@
 **Revisit for follow up question**
 75. Sort Colors - Counting Sort
 215. Kth Largest Element In An Array - Quick Select
+1863. Sum Of All Subset XOR Totals
