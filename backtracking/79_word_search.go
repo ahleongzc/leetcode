@@ -3,7 +3,6 @@ package backtracking
 func Exist(board [][]byte, word string) bool {
 	numRows := len(board)
 	numCols := len(board[0])
-	visited := make(map[[2]int]bool)
 
 	var dfs func(row, col int, index int) bool
 	dfs = func(row, col int, index int) bool {
@@ -15,11 +14,11 @@ func Exist(board [][]byte, word string) bool {
 			return false
 		}
 
-		if word[index] != board[row][col] {
+		if board[row][col] == '$' {
 			return false
 		}
 
-		if _, exists := visited[[2]int{row, col}]; exists {
+		if word[index] != board[row][col] {
 			return false
 		}
 
@@ -27,11 +26,12 @@ func Exist(board [][]byte, word string) bool {
 			return true
 		}
 
-		visited[[2]int{row, col}] = true
+		currChar := board[row][col]
+		board[row][col] = '$'
 
 		result := dfs(row+1, col, index+1) || dfs(row-1, col, index+1) || dfs(row, col+1, index+1) || dfs(row, col-1, index+1)
 
-		delete(visited, [2]int{row, col})
+		board[row][col] = currChar
 
 		return result
 	}
