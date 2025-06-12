@@ -1,15 +1,14 @@
 **Practice Link**: https://neetcode.io/practice
 
-**Sorting algorithms**
-- Merge Sort
+**New algorithms**
 - Counting Sort
 - Patience (Solitaire) Sort
-
-**Tree Traversals**
 - Morris Traversal
+- Boyer-Moore Voting Algorithm
+- Binary search (Lower/Upper) Bound
 
 **Revisit for follow up question**
 75. Sort Colors - Counting Sort
 215. Kth Largest Element In An Array - Quick Select
-230. Kth Smallest Element In A BST
+230. Kth Smallest Element In A BST - Morris Traversal
 1863. Sum Of All Subset XOR Totals

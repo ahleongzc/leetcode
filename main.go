@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	_ "leetcode/1d_dynamic_programming"
-	_ "leetcode/arrays_and_hashing"
-	bt "leetcode/backtracking"
+	a "leetcode/arrays_and_hashing"
+	_ "leetcode/backtracking"
 	_ "leetcode/binary_search"
 	_ "leetcode/linked_list"
 	_ "leetcode/stack"
@@ -12,5 +12,5 @@ import (
 )
 
 func main() {
-	fmt.Println(bt.SubsetXORSum([]int{5, 1, 6}))
+	fmt.Println(a.MajorityElementII([]int{1, 1, 2, 2, 3}))
 }
