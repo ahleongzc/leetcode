@@ -6,6 +6,7 @@
 - Morris Traversal
 - Boyer-Moore Voting Algorithm
 - Binary search (Lower/Upper) Bound
+- Quick Select
 
 **Revisit for follow up question**
 75. Sort Colors - Counting Sort
