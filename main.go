@@ -3,12 +3,13 @@ package main
 import (
 	"fmt"
 
-	dp "leetcode/1d_dynamic_programming"
+	_ "leetcode/1d_dynamic_programming"
 	_ "leetcode/2d_dynamic_programming"
 	_ "leetcode/arrays_and_hashing"
 	_ "leetcode/backtracking"
 	_ "leetcode/binary_search"
 	_ "leetcode/graphs"
+	g "leetcode/greedy"
 	_ "leetcode/linked_list"
 	_ "leetcode/stack"
 	_ "leetcode/trees"
@@ -16,5 +17,5 @@ import (
 )
 
 func main() {
-	fmt.Println(dp.RobII([]int{2, 3, 10, 200}))
+	fmt.Println(g.FindBuildings([]int{4, 2, 3, 2, 1}))
 }
