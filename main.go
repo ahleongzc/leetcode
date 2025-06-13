@@ -12,5 +12,5 @@ import (
 )
 
 func main() {
-	fmt.Println(b.Permute([]int{1, 2, 3}))
+	fmt.Println(b.SubsetsWithDup([]int{2, 1, 2}))
 }
