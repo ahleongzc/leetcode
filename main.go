@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	_ "leetcode/1d_dynamic_programming"
-	dp "leetcode/2d_dynamic_programming"
+	dp "leetcode/1d_dynamic_programming"
+	_ "leetcode/2d_dynamic_programming"
 	_ "leetcode/arrays_and_hashing"
 	_ "leetcode/backtracking"
 	_ "leetcode/binary_search"
@@ -16,5 +16,5 @@ import (
 )
 
 func main() {
-	fmt.Print(dp.UniquePaths(3, 7))
+	fmt.Println(dp.RobII([]int{2, 3, 10, 200}))
 }
