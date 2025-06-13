@@ -10,6 +10,7 @@
 
 **Revisit for follow up question**\
 75. Sort Colors - Counting Sort\
+202. Happy Number - Floyd's Cycle Detection\
 215. Kth Largest Element In An Array - Quick Select\
 230. Kth Smallest Element In A BST - Morris Traversal\
-1863. Sum Of All Subset XOR Totals
+1863. Sum Of All Subset XOR Totals\
