@@ -10,16 +10,16 @@ func DiameterOfBinaryTree(root *TreeNode) int {
 			return 0, 0
 		}
 
-		leftDiameter, leftHeight := dfs(node.Left)
-		rightDiameter, rightHeight := dfs(node.Right)
+		leftDiameter, leftDepth := dfs(node.Left)
+		rightDiameter, rightDepth := dfs(node.Right)
 
 		maxDiameter := max(
 			leftDiameter,
 			rightDiameter,
-			leftHeight+rightHeight,
+			leftDepth+rightDepth,
 		)
 
-		maxDepth := max(leftHeight, rightHeight) + 1
+		maxDepth := max(leftDepth, rightDepth) + 1
 
 		return maxDiameter, maxDepth
 	}
