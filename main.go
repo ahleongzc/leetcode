@@ -9,13 +9,13 @@ import (
 	_ "leetcode/backtracking"
 	_ "leetcode/binary_search"
 	_ "leetcode/graphs"
-	g "leetcode/greedy"
+	_ "leetcode/greedy"
 	_ "leetcode/linked_list"
-	_ "leetcode/stack"
+	s "leetcode/stack"
 	_ "leetcode/trees"
 	_ "leetcode/two_pointers"
 )
 
 func main() {
-	fmt.Println(g.FindBuildings([]int{4, 2, 3, 2, 1}))
+	fmt.Println(s.MinRemoveToMakeValid("))(("))
 }

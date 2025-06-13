@@ -8,10 +8,12 @@ func FindBuildings(heights []int) []int {
 
 	for i := len(heights) - 2; i >= 0; i-- {
 		if heights[i] > heights[i+1] {
-			result = slices.Insert(result, 0, i)
+			result = append(result, i)
 		}
 		heights[i] = max(heights[i], heights[i+1])
 	}
+
+	slices.Reverse(result)
 
 	return result
 }
