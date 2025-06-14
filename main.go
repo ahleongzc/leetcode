@@ -8,14 +8,14 @@ import (
 	_ "leetcode/arrays_and_hashing"
 	_ "leetcode/backtracking"
 	_ "leetcode/binary_search"
-	_ "leetcode/graphs"
+	g "leetcode/graphs"
 	_ "leetcode/greedy"
 	_ "leetcode/linked_list"
-	s "leetcode/stack"
+	_ "leetcode/stack"
 	_ "leetcode/trees"
 	_ "leetcode/two_pointers"
 )
 
 func main() {
-	fmt.Println(s.MinRemoveToMakeValid("))(("))
+	fmt.Println(g.CanFinish(2, [][]int{{1, 0}}))
 }
