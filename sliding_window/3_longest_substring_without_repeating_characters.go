@@ -1,4 +1,4 @@
-package twopointers
+package slidingwindow
 
 func LengthOfLongestSubstring(s string) int {
 	if len(s) <= 1 {
