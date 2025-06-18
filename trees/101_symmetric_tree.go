@@ -1,9 +1,9 @@
 package trees
 
 func IsSymmetric(root *TreeNode) bool {
-	var dfs func(left, right *TreeNode)bool 
+	var dfs func(left, right *TreeNode) bool
 	dfs = func(left, right *TreeNode) bool {
-		if left == nil && right == nil{
+		if left == nil && right == nil {
 			return true
 		}
 
