@@ -12,7 +12,7 @@ func RemoveLeafNodes(root *TreeNode, target int) *TreeNode {
 	}
 
 	var dfs func(root *TreeNode) *TreeNode
-	dfs = func(root *TreeNode) *TreeNode{
+	dfs = func(root *TreeNode) *TreeNode {
 		if root == nil {
 			return nil
 		}
