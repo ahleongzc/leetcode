@@ -1,11 +1,10 @@
 package main
 
 import (
-	"fmt"
 	_ "leetcode/1d_dynamic_programming"
 	_ "leetcode/2d_dynamic_programming"
-	ag "leetcode/advanced_graphs"
-	_ "leetcode/arrays_and_hashing"
+	_ "leetcode/advanced_graphs"
+	a "leetcode/arrays_and_hashing"
 	_ "leetcode/backtracking"
 	_ "leetcode/binary_search"
 	_ "leetcode/graphs"
@@ -17,9 +16,6 @@ import (
 )
 
 func main() {
-
-	fmt.Println(ag.MinCostConnectPoints([][]int{
-		{0, 0}, {2, 2}, {3, 10}, {5, 2}, {7, 0},
-	}))
+	a.Constructor([]int{-2, 0, 3, -5, 2, -1})
 
 }
