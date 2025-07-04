@@ -17,5 +17,4 @@ import (
 
 func main() {
 	a.Constructor([]int{-2, 0, 3, -5, 2, -1})
-
 }
