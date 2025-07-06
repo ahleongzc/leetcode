@@ -6,50 +6,72 @@ import (
 	_ "leetcode/2d_dynamic_programming"
 	_ "leetcode/advanced_graphs"
 	_ "leetcode/arrays_and_hashing"
-	b "leetcode/backtracking"
+	_ "leetcode/backtracking"
 	_ "leetcode/binary_search"
 	_ "leetcode/graphs"
 	_ "leetcode/greedy"
-	_ "leetcode/linked_list"
+	ll "leetcode/linked_list"
 	_ "leetcode/stack"
 	_ "leetcode/trees"
 	_ "leetcode/two_pointers"
 )
 
+// Helper function to create a linked list from a slice
+func createLinkedList(nums []int) *ll.ListNode {
+	if len(nums) == 0 {
+		return nil
+	}
+	head := &ll.ListNode{Val: nums[0]}
+	current := head
+	for _, num := range nums[1:] {
+		current.Next = &ll.ListNode{Val: num}
+		current = current.Next
+	}
+	return head
+}
+
+// Helper function to convert a linked list to a slice
+func linkedListToSlice(head *ll.ListNode) []int {
+	result := []int{}
+	for head != nil {
+		result = append(result, head.Val)
+		head = head.Next
+	}
+	return result
+}
+
 func main() {
 	testCases := []struct {
-		digits string
-		expect []string
+		input  []int
+		expect []int
 	}{
 		{
-			digits: "23",
-			expect: []string{"ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"},
+			input:  []int{1, 2, 3, 4},
+			expect: []int{1, 4, 2, 3},
 		},
 		{
-			digits: "2",
-			expect: []string{"a", "b", "c"},
+			input:  []int{1, 2, 3, 4, 5},
+			expect: []int{1, 5, 2, 4, 3},
 		},
 		{
-			digits: "",
-			expect: []string{},
+			input:  []int{1},
+			expect: []int{1},
 		},
 		{
-			digits: "9",
-			expect: []string{"w", "x", "y", "z"},
+			input:  []int{},
+			expect: []int{},
 		},
 		{
-			digits: "234",
-			expect: []string{
-				"adg", "adh", "adi", "aeg", "aeh", "aei", "afg", "afh", "afi",
-				"bdg", "bdh", "bdi", "beg", "beh", "bei", "bfg", "bfh", "bfi",
-				"cdg", "cdh", "cdi", "ceg", "ceh", "cei", "cfg", "cfh", "cfi",
-			},
+			input:  []int{1, 2},
+			expect: []int{1, 2},
 		},
 	}
 
 	for i, tc := range testCases {
-		result := b.LetterCombinations(tc.digits)
-		fmt.Printf("Test case %d: digits=%s\n", i+1, tc.digits)
+		head := createLinkedList(tc.input)
+		ll.ReorderList(head)
+		result := linkedListToSlice(head)
+		fmt.Printf("Test case %d: input=%v\n", i+1, tc.input)
 		fmt.Printf("Expected: %v\n", tc.expect)
 		fmt.Printf("Got: %v\n", result)
 		if fmt.Sprintf("%v", result) == fmt.Sprintf("%v", tc.expect) {
