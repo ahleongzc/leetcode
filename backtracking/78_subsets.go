@@ -1,26 +1,26 @@
 package backtracking
 
-func Subsets(nums []int) [][]int {
-	res := make([][]int, 0)
+func subsets(nums []int) [][]int {
+	output := make([][]int, 0)
+	buffer := make([]int, 0)
 
-	var dfs func(i int, intermediary []int)
-
-	dfs = func(i int, intermediary []int) {
-		if i == len(nums) {
-			intermediaryCopy := make([]int, len(intermediary))
-			copy(intermediaryCopy, intermediary)
-			res = append(res, intermediaryCopy)
+	var dfs func(index int)
+	dfs = func(index int) {
+		if index == len(nums) {
+			newBuffer := make([]int, len(buffer))
+			copy(newBuffer, buffer)
+			output = append(output, newBuffer)
 			return
 		}
 
-		intermediary = append(intermediary, nums[i])
-		dfs(i+1, intermediary)
+		buffer = append(buffer, nums[index])
+		index++
+		dfs(index)
 
-		intermediary = intermediary[:len(intermediary)-1]
-		dfs(i+1, intermediary)
+		buffer = buffer[:len(buffer)-1]
+		dfs(index)
 	}
 
-	dfs(0, make([]int, 0))
-
-	return res
+	dfs(0)
+	return output
 }
