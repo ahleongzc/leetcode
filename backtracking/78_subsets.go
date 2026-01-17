@@ -6,19 +6,19 @@ func subsets(nums []int) [][]int {
 
 	var dfs func(index int)
 	dfs = func(index int) {
+		bufferCopy := make([]int, len(buffer))
+		copy(bufferCopy, buffer)
+		output = append(output, bufferCopy)
+
 		if index == len(nums) {
-			newBuffer := make([]int, len(buffer))
-			copy(newBuffer, buffer)
-			output = append(output, newBuffer)
 			return
 		}
 
-		buffer = append(buffer, nums[index])
-		index++
-		dfs(index)
-
-		buffer = buffer[:len(buffer)-1]
-		dfs(index)
+		for i := index; i < len(nums); i++ {
+			buffer = append(buffer, nums[i])
+			dfs(i + 1)
+			buffer = buffer[:len(buffer)-1]
+		}
 	}
 
 	dfs(0)
