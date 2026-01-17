@@ -1,29 +1,29 @@
 package backtracking
 
 func CombinationSum(candidates []int, target int) [][]int {
-	res := make([][]int, 0)
-	intermediary := make([]int, 0)
+	output := make([][]int, 0)
+	buffer := make([]int, 0)
 
-	var dfs func(i, total int)
-	dfs = func(i, total int) {
-		if i == len(candidates) || total > target {
-			return
-		}
-		if total == target {
-			intermediaryCopy := make([]int, len(intermediary))
-			copy(intermediaryCopy, intermediary)
-			res = append(res, intermediaryCopy)
+	var dfs func(index, currSum int)
+	dfs = func(index, currSum int) {
+		if currSum > target {
 			return
 		}
 
-		intermediary = append(intermediary, candidates[i])
-		dfs(i, total+candidates[i])
+		if currSum == target {
+			newSlice := make([]int, len(buffer))
+			copy(newSlice, buffer)
+			output = append(output, newSlice)
+			return
+		}
 
-		intermediary = intermediary[:len(intermediary)-1]
-		dfs(i+1, total)
+		for i := index; i < len(candidates); i++ {
+			buffer = append(buffer, candidates[i])
+			dfs(i, currSum+candidates[i])
+			buffer = buffer[:len(buffer)-1]
+		}
 	}
 
 	dfs(0, 0)
-
-	return res
+	return output
 }
