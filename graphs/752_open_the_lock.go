@@ -1,68 +1,87 @@
 package graphs
 
-import (
-	"strconv"
-)
+type lock string
 
-func OpenLock(deadends []string, target string) int {
-	// Step 1: Set up
-	start := "0000"
-	visited := make(map[string]bool)
-	for _, deadend := range deadends {
-		visited[deadend] = true
+func (l lock) decrease(index int) lock {
+	lockCopy := []byte(l)
+	if lockCopy[index] == '0' {
+		lockCopy[index] = '9'
+	} else {
+		lockCopy[index]--
+	}
+	return lock(lockCopy)
+}
+
+func (l lock) increase(index int) lock {
+	lockCopy := []byte(l)
+	if lockCopy[index] == '9' {
+		lockCopy[index] = '0'
+	} else {
+		lockCopy[index]++
+	}
+	return lock(lockCopy)
+}
+
+func openLock(deadends []string, target string) int {
+	if target == "0000" {
+		return 0
 	}
 
-	// Step 2: Find edge case
-	if _, exists := visited[start]; exists {
+	explored := make(map[lock]struct{})
+	invalid := make(map[lock]struct{})
+
+	for _, deadend := range deadends {
+		invalid[lock(deadend)] = struct{}{}
+	}
+
+	if _, ok := invalid["0000"]; ok {
 		return -1
 	}
 
-	var increment = func(lock string, pos int) string {
-		val, _ := strconv.Atoi(string(lock[pos]))
-		valStr := strconv.Itoa((val + 1) % 10)
-		res := lock[:pos] + valStr + lock[pos+1:]
+	queue := []lock{}
+	queue = append(queue, "0000")
+	explored["0000"] = struct{}{}
 
-		return res
-	}
-
-	var decrement = func(lock string, pos int) string {
-		val, _ := strconv.Atoi(string(lock[pos]))
-		valStr := strconv.Itoa((val - 1 + 10) % 10)
-		res := lock[:pos] + valStr + lock[pos+1:]
-
-		return res
-	}
-
-	// Step 3: BFS
-	queue := []string{start}
-	steps := 0
+	turns := 0
 
 	for len(queue) != 0 {
-		elements := queue[:]
-		queue = []string{}
+		currLevelLength := len(queue)
 
-		for _, element := range elements {
-			if element == target {
-				return steps
-			}
+		for _ = range currLevelLength {
+			curr := queue[0]
+			queue = queue[1:]
 
 			for i := range 4 {
-				incremented := increment(element, i)
-				decremented := decrement(element, i)
+				increasedLock := curr.increase(i)
+				decreasedLock := curr.decrease(i)
 
-				if _, exists := visited[incremented]; !exists {
-					queue = append(queue, incremented)
-					visited[incremented] = true
+				if string(increasedLock) == target {
+					return turns + 1
 				}
 
-				if _, exists := visited[decremented]; !exists {
-					queue = append(queue, decremented)
-					visited[decremented] = true
+				if string(decreasedLock) == target {
+					return turns + 1
+				}
+
+				_, isIncreasedInvalid := invalid[increasedLock]
+				_, isIncreasedExplored := explored[increasedLock]
+
+				_, isDecreasedInvalid := invalid[decreasedLock]
+				_, isDecreasedExplored := explored[decreasedLock]
+
+				if !isIncreasedInvalid && !isIncreasedExplored {
+					queue = append(queue, increasedLock)
+					explored[increasedLock] = struct{}{}
+				}
+
+				if !isDecreasedInvalid && !isDecreasedExplored {
+					queue = append(queue, decreasedLock)
+					explored[decreasedLock] = struct{}{}
 				}
 			}
 		}
 
-		steps++
+		turns++
 	}
 
 	return -1
