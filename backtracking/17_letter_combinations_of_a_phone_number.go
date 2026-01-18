@@ -1,40 +1,32 @@
 package backtracking
 
-func LetterCombinations(digits string) []string {
-	if len(digits) == 0 {
-		return []string{}
-	}
+func letterCombinations(digits string) []string {
+	combinations := make(map[byte][]string)
+	combinations['2'] = []string{"a", "b", "c"}
+	combinations['3'] = []string{"d", "e", "f"}
+	combinations['4'] = []string{"g", "h", "i"}
+	combinations['5'] = []string{"j", "k", "l"}
+	combinations['6'] = []string{"m", "n", "o"}
+	combinations['7'] = []string{"p", "q", "r", "s"}
+	combinations['8'] = []string{"t", "u", "v"}
+	combinations['9'] = []string{"w", "x", "y", "z"}
 
-	keyMap := map[string][]string{
-		"2": {"a", "b", "c"},
-		"3": {"d", "e", "f"},
-		"4": {"g", "h", "i"},
-		"5": {"j", "k", "l"},
-		"6": {"m", "n", "o"},
-		"7": {"p", "q", "r", "s"},
-		"8": {"t", "u", "v"},
-		"9": {"w", "x", "y", "z"},
-	}
+	output := make([]string, 0)
 
-	res := make([]string, 0)
-
-	var backtrack func(i int)
-	intermediary := ""
-
-	backtrack = func(i int) {
-		if i == len(digits) {
-			res = append(res, intermediary)
+	var dfs func(digitIndex int, curr string)
+	dfs = func(digitIndex int, curr string) {
+		if digitIndex == len(digits) {
+			output = append(output, curr)
 			return
 		}
 
-		for _, c := range keyMap[string(digits[i])] {
-			intermediary += c
-			backtrack(i + 1)
-			intermediary = intermediary[:len(intermediary)-1]
+		for _, char := range combinations[digits[digitIndex]] {
+			curr += char
+			dfs(digitIndex+1, curr)
+			curr = curr[:len(curr)-1]
 		}
 	}
 
-	backtrack(0)
-
-	return res
+	dfs(0, "")
+	return output
 }
