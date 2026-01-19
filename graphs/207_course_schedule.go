@@ -1,40 +1,36 @@
 package graphs
 
-func CanFinish(numCourses int, prerequisites [][]int) bool {
-	// Initialising the adjacency list
+func canFinish(numCourses int, prerequisites [][]int) bool {
 	adjList := make(map[int][]int)
-	for i := range numCourses {
-		adjList[i] = make([]int, 0)
+	for _, prerequisite := range prerequisites {
+		before, after := prerequisite[1], prerequisite[0]
+		adjList[before] = append(adjList[before], after)
 	}
 
-	for _, prerequisitePair := range prerequisites {
-		curr, pre := prerequisitePair[0], prerequisitePair[1]
-		adjList[curr] = append(adjList[curr], pre)
-	}
+	processing := make(map[int]struct{})
+	visited := make(map[int]struct{})
 
-	visited := make(map[int]bool)
-	processing := make(map[int]bool)
-
-	var dfs func(curr int) bool
-	dfs = func(curr int) bool {
-		if _, exists := visited[curr]; exists {
-			return true
-		}
-		if _, exists := processing[curr]; exists {
+	var dfs func(course int) bool
+	dfs = func(course int) bool {
+		if _, ok := processing[course]; ok {
 			return false
 		}
+		
+		if _, ok := visited[course]; ok {
+			return true
+		}
 
-		processing[curr] = true
+		processing[course] = struct{}{}
 
-		for _, neighbour := range adjList[curr] {
-			if !dfs(neighbour) {
+		for _, child := range adjList[course] {
+			if !dfs(child) {
 				return false
 			}
 		}
 
-		delete(processing, curr)
-		visited[curr] = true
-
+		delete(processing, course)
+		visited[course] = struct{}{}
+		
 		return true
 	}
 
