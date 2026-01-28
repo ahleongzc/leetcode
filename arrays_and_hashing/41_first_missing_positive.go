@@ -27,6 +27,8 @@ func firstMissingPositive(nums []int) int {
 		}
 	}
 
+	// if the array value is negative, the it means that the value exists
+	// which means that if the array value is positive, this means that the value doesn't exist, and we return it
 	for i, num := range nums {
 		if num >= 0 {
 			return i + 1
