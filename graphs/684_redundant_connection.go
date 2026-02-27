@@ -1,47 +1,58 @@
 package graphs
 
-func FindRedundantConnection(edges [][]int) []int {
-	parent := make(map[int]int)
-	rank := make(map[int]int)
+type unionFindFindRedundantConnection struct {
+	rep  map[int]int
+	rank map[int]int
+}
 
-	for i := range len(edges) {
-		parent[i] = i
-		rank[i] = 0
+func newUnionFindFindRedundantConnection(numNode int) *unionFindFindRedundantConnection {
+	uf := &unionFindFindRedundantConnection{
+		rep:  make(map[int]int),
+		rank: make(map[int]int),
 	}
 
-	find := func(i int) int {
-		p := parent[i]
-		for {
-			if p == parent[p] {
-				break
-			}
-			parent[i] = parent[parent[i]]
-			p = parent[i]
-		}
-		return p
+	for i := range numNode {
+		uf.rep[i+1] = i + 1
+		uf.rank[i+1] = 0
+	}
+	return uf
+}
+
+func (uf *unionFindFindRedundantConnection) find(node int) int {
+	if uf.rep[node] == node {
+		return node
+	}
+	uf.rep[node] = uf.find(uf.rep[node])
+	return uf.rep[node]
+}
+
+func (uf *unionFindFindRedundantConnection) union(nodeA, nodeB int) bool {
+	repA, repB := uf.find(nodeA), uf.find(nodeB)
+	if repA == repB {
+		return false
 	}
 
-	union := func(i, j int) bool {
-		p1, p2 := find(i), find(j)
-		if p1 == p2 {
-			return false
-		}
-
-		if rank[p1] > rank[p2] {
-			parent[p2] = p1
-		} else {
-			parent[p1] = p2
-			rank[p1]++
-		}
-
-		return true
+	rankRepA, rankRepB := uf.rank[repA], uf.rank[repB]
+	if rankRepA > rankRepB {
+		uf.rep[repB] = repA
+	} else if rankRepB > rankRepA {
+		uf.rep[repA] = repB
+	} else {
+		uf.rep[repA] = repB
+		uf.rank[repB]++
 	}
+	return true
+}
+
+func findRedundantConnection(edges [][]int) []int {
+	uf := newUnionFindFindRedundantConnection(len(edges))
 
 	for _, edge := range edges {
-		if !union(edge[0], edge[1]) {
-			return edge
+		if !uf.union(edge[0], edge[1]) {
+			return []int{
+				edge[0], edge[1],
+			}
 		}
 	}
-
 	return nil
 }
