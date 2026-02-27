@@ -5,7 +5,7 @@ func maxSubArray(nums []int) int {
 		return nums[0]
 	}
 
-	maximumSum := 0
+	maximumSum := nums[0]
 	currSum := 0
 
 	for _, num := range nums {
