@@ -27,6 +27,11 @@ func TestDecodeWays(t *testing.T) {
 			s:        "06",
 			expected: 0,
 		},
+		{
+			name:     "example 4",
+			s:        "99",
+			expected: 1,
+		},
 	}
 
 	for _, test := range tests {
