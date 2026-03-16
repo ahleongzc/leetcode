@@ -13,6 +13,13 @@ func TestMaxProduct(t *testing.T) {
 		expected int
 	}{
 		{
+			name: "example 0",
+			nums: []int{
+				1, 2, -3, 4, 6,
+			},
+			expected: 24,
+		},
+		{
 			name: "example 1",
 			nums: []int{
 				2, 3, -2, 4,

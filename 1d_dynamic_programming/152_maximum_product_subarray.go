@@ -1,19 +1,18 @@
 package oneddp
 
-import (
-	"slices"
-)
-
 func maxProduct(nums []int) int {
-	output := slices.Max(nums)
+	res := nums[0]
 	currMin, currMax := 1, 1
 
 	for _, num := range nums {
-		temp := currMax * num
-		currMax = max(num*currMax, num*currMin, num)
-		currMin = min(temp, num*currMin, num)
-		output = max(output, currMax)
+		tmp := currMax * num
+
+		// if the current value is 0, then the next iteration will just take the number itself,
+		// updating currMax to be a positive value (..., num)
+		currMax = max(tmp, num*currMin, num)
+		currMin = min(tmp, num*currMin, num)
+		res = max(res, currMax)
 	}
 
-	return output
+	return res
 }
