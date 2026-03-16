@@ -8,8 +8,6 @@ func quickSort(nums []int) []int {
 	return nums
 }
 
-// 4, 6, 3, 5
-
 func qs(nums []int, start, end int) {
 	if start >= end {
 		return
@@ -18,13 +16,15 @@ func qs(nums []int, start, end int) {
 	pivot := nums[end]
 	left := start
 
-	for i := left; i < end; i++ {
-		if nums[i] < pivot {
-			tmp := nums[left]
-			nums[left] = nums[i]
-			nums[i] = tmp
-			left++
+	for i := start; i < end; i++ {
+		if nums[i] >= pivot {
+			continue
 		}
+
+ 		tmp := nums[i]
+		nums[i] = nums[left]
+		nums[left] = tmp
+		left++
 	}
 
 	nums[end] = nums[left]
