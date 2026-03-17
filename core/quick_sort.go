@@ -16,12 +16,12 @@ func qs(nums []int, start, end int) {
 	pivot := nums[end]
 	left := start
 
-	for i := start; i < end; i++ {
+	for i := left; i < end; i++ {
 		if nums[i] >= pivot {
 			continue
 		}
 
- 		tmp := nums[i]
+		tmp := nums[i]
 		nums[i] = nums[left]
 		nums[left] = tmp
 		left++

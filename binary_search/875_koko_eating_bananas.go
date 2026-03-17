@@ -1,39 +1,30 @@
 package binarysearch
 
-func MinEatingSpeed(piles []int, h int) int {
+import "slices"
 
-	var timeTakenToFinishBananas = func(piles []int, speed int) int {
-		time := 0
+func minEatingSpeed(piles []int, h int) int {
+	left, right := 1, slices.Max(piles)
+
+	var canFinish func(speed int) bool
+	canFinish = func(speed int) bool {
+		hoursTaken := 0
 		for _, pile := range piles {
-			time += pile / speed
+			hoursTaken += pile / speed
 			if pile%speed != 0 {
-				time += 1
+				hoursTaken++
 			}
 		}
-
-		return time
+		return hoursTaken <= h
 	}
 
-	startSpeed := 1
-	endSpeed := 0
-
-	for _, pile := range piles {
-		endSpeed = max(endSpeed, pile)
-	}
-
-	minEatingSpeed := endSpeed
-
-	for startSpeed <= endSpeed {
-		speed := (startSpeed + endSpeed) / 2
-		time := timeTakenToFinishBananas(piles, speed)
-
-		if time <= h {
-			minEatingSpeed = speed
-			endSpeed = speed - 1
+	for left < right {
+		mid := (left + right) / 2
+		if canFinish(mid) {
+			right = mid
 		} else {
-			startSpeed = speed + 1
+			left = mid + 1
 		}
 	}
 
-	return minEatingSpeed
+	return left
 }
