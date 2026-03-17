@@ -1,53 +1,55 @@
 package oneddp
 
-// Patience (Solitaire) sorting
-func LengthOfLISOptimised(nums []int) int {
-	patience := make([]int, 0)
+func lengthOfLIS(nums []int) int {
+	dp := make([]int, 0)
+	dp = append(dp, nums[0])
 
-	for _, num := range nums {
-		left, right := 0, len(patience)
-
-		for left < right {
-			mid := (right + left) / 2
-			if patience[mid] < num {
-				left = mid + 1
+	var binarySearch func(target, start, end int) int
+	binarySearch = func(target, start, end int) int {
+		for start < end {
+			mid := (start + end) / 2
+			if dp[mid] < target {
+				start = mid + 1
 			} else {
-				right = mid
+				end = mid
 			}
 		}
-
-		if left == len(patience) {
-			patience = append(patience, num)
-		} else {
-			patience[left] = num
-		}
+		return start
 	}
 
-	return len(patience)
+	for _, num := range nums {
+		if num > dp[len(dp)-1] {
+			dp = append(dp, num)
+			continue
+		}
+
+		// replace the smallest possible number in dp where the number >= num
+		id := binarySearch(num, 0, len(dp)-1)
+		dp[id] = num
+	}
+
+	return len(dp)
 }
 
-func LengthOfLIS(nums []int) int {
+func lengthOfLISQuadratic(nums []int) int {
 	dp := make([]int, len(nums))
-	for i := range len(nums) {
+	for i := range dp {
 		dp[i] = 1
 	}
 
-	for i := 1; i < len(nums); i++ {
-		curr := nums[i]
-
-		for j := range len(nums[:i]) {
-			prev := nums[j]
-
-			if curr > prev {
-				dp[i] = max(dp[j]+1, dp[i])
+	for i := range len(nums) {
+		for j := range i {
+			if nums[i] <= nums[j] {
+				continue
 			}
+			dp[i] = max(dp[i], 1+dp[j])
 		}
 	}
 
-	lis := 0
-	for _, num := range dp {
-		lis = max(lis, num)
+	output := -1
+	for _, val := range dp {
+		output = max(output, val)
 	}
 
-	return lis
+	return output
 }
