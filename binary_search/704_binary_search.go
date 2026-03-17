@@ -1,22 +1,18 @@
 package binarysearch
 
-func Search(nums []int, target int) int {
-	start := 0
-	end := len(nums) - 1
-
-	for start <= end {
-		mid := (start + end) / 2
-
+func search(nums []int, target int) int {
+	left, right := 0, len(nums)-1
+	for left <= right {
+		mid := (left + right) / 2
 		if nums[mid] == target {
 			return mid
 		}
 
 		if nums[mid] > target {
-			end = mid - 1
+			right = mid - 1
 		} else {
-			start = mid + 1
+			left = mid + 1
 		}
-
 	}
 
 	return -1

@@ -4,6 +4,9 @@ func lengthOfLIS(nums []int) int {
 	dp := make([]int, 0)
 	dp = append(dp, nums[0])
 
+	// [1, 4]
+	// target = 2
+
 	var binarySearch func(target, start, end int) int
 	binarySearch = func(target, start, end int) int {
 		for start < end {
@@ -23,7 +26,7 @@ func lengthOfLIS(nums []int) int {
 			continue
 		}
 
-		// replace the smallest possible number in dp where the number >= num
+		// replace the smallest possible number in dp where the dp[id] >= num
 		id := binarySearch(num, 0, len(dp)-1)
 		dp[id] = num
 	}
