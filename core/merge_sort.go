@@ -1,40 +1,41 @@
 package core
 
 func mergeSort(numbers []int) []int {
-	if len(numbers) == 1 {
+	if len(numbers) <= 1 {
 		return numbers
 	}
 
 	mid := len(numbers) / 2
-	left := mergeSort(numbers[:mid])
-	right := mergeSort(numbers[mid:])
+	leftHalf := mergeSort(numbers[:mid])
+	rightHalf := mergeSort(numbers[mid:])
 
-	return merge(left, right)
+	return merge(leftHalf, rightHalf)
 }
 
 func merge(left, right []int) []int {
-	res := make([]int, 0)
-	l, r := 0, 0
+	leftPtr, rightPtr := 0, 0
+	result := make([]int, 0)
 
-	for l < len(left) && r < len(right) {
-		if left[l] < right[r] {
-			res = append(res, left[l])
-			l++
-		} else {
-			res = append(res, right[r])
-			r++
+	for leftPtr < len(left) && rightPtr < len(right) {
+		if left[leftPtr] < right[rightPtr] {
+			result = append(result, left[leftPtr])
+			leftPtr++
+			continue
 		}
+
+		result = append(result, right[rightPtr])
+		rightPtr++
 	}
 
-	for l < len(left) {
-		res = append(res, left[l])
-		l++
+	for leftPtr < len(left) {
+		result = append(result, left[leftPtr])
+		leftPtr++
 	}
 
-	for r < len(right) {
-		res = append(res, right[r])
-		r++
+	for rightPtr < len(right) {
+		result = append(result, right[rightPtr])
+		rightPtr++
 	}
 
-	return res
+	return result
 }
