@@ -42,7 +42,7 @@ func TestCombinationSum(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			output := CombinationSum(test.input, test.target)
+			output := combinationSum(test.input, test.target)
 			normalizeCombinations(output)
 			normalizeCombinations(test.expected)
 
