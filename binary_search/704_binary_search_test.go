@@ -33,7 +33,7 @@ func TestBinarySearch(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			actual := search(test.nums, test.target)
+			actual := bsearch(test.nums, test.target)
 			if !assert.Equal(t, test.expected, actual) {
 				t.Fatal()
 			}
