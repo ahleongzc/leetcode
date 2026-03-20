@@ -2,47 +2,37 @@ package heappriorityqueue
 
 import "container/heap"
 
-type minHeap []int
+type findKthLargestHeap []int
 
-func (mh minHeap) Len() int {
-	return len(mh)
+func (f findKthLargestHeap) Len() int           { return len(f) }
+func (f findKthLargestHeap) Less(i, j int) bool { return f[i] < f[j] }
+func (f findKthLargestHeap) Swap(i, j int)      { f[i], f[j] = f[j], f[i] }
+
+func (f *findKthLargestHeap) Push(x any) {
+	*f = append(*f, x.(int))
 }
 
-func (mh minHeap) Less(i, j int) bool {
-	return mh[i] < mh[j]
+func (f *findKthLargestHeap) Pop() any {
+	old := *f
+	n := len(old)
+	x := old[n-1]
+	*f = old[:n-1]
+	return x
 }
 
-func (mh minHeap) Swap(i, j int) {
-	mh[i], mh[j] = mh[j], mh[i]
-}
-
-func (mh *minHeap) Push(x any) {
-	element, ok := x.(int)
-	if !ok {
-		return
-	}
-	*mh = append(*mh, element)
-}
-
-func (mh *minHeap) Pop() any {
-	element := (*mh)[len(*mh)-1]
-	*mh = (*mh)[:len(*mh)-1]
-	return element
-}
-
-func FindKthLargest(nums []int, k int) int {
-	numsReversed := make([]int, len(nums))
-	for i, num := range nums {
-		numsReversed[i] = -1 * num
+func findKthLargest(nums []int, k int) int {
+	pq := &findKthLargestHeap{}
+	*pq = nums
+	for i := range *pq {
+		(*pq)[i] *= -1
 	}
 
-	mh := &minHeap{}
-	*mh = numsReversed
-	heap.Init(mh)
+	heap.Init(pq)
 
 	for range k - 1 {
-		heap.Pop(mh)
+		heap.Pop(pq)
 	}
 
-	return heap.Pop(mh).(int) * -1
+	res := heap.Pop(pq)
+	return -1 * res.(int)
 }
