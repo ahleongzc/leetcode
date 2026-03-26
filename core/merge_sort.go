@@ -6,36 +6,34 @@ func mergeSort(numbers []int) []int {
 	}
 
 	mid := len(numbers) / 2
-	leftHalf := mergeSort(numbers[:mid])
-	rightHalf := mergeSort(numbers[mid:])
+	left := mergeSort(numbers[:mid])
+	right := mergeSort(numbers[mid:])
 
-	return merge(leftHalf, rightHalf)
+	return merge(left, right)
 }
 
 func merge(left, right []int) []int {
+	res := make([]int, 0)
 	leftPtr, rightPtr := 0, 0
-	result := make([]int, 0)
 
 	for leftPtr < len(left) && rightPtr < len(right) {
 		if left[leftPtr] < right[rightPtr] {
-			result = append(result, left[leftPtr])
+			res = append(res, left[leftPtr])
 			leftPtr++
-			continue
 		}
-
-		result = append(result, right[rightPtr])
+		res = append(res, right[rightPtr])
 		rightPtr++
 	}
 
 	for leftPtr < len(left) {
-		result = append(result, left[leftPtr])
+		res = append(res, left[leftPtr])
 		leftPtr++
 	}
 
 	for rightPtr < len(right) {
-		result = append(result, right[rightPtr])
+		res = append(res, right[rightPtr])
 		rightPtr++
 	}
 
-	return result
+	return res
 }
