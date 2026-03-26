@@ -1,4 +1,4 @@
-package arraysandhashing
+package greedy
 
 import (
 	"slices"
