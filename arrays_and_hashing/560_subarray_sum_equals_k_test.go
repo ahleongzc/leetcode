@@ -14,6 +14,12 @@ func TestSubarraySum(t *testing.T) {
 		expected int
 	}{
 		{
+			name:     "example 0",
+			nums:     []int{1, 1, 1},
+			k:        1,
+			expected: 3,
+		},
+		{
 			name:     "example 1",
 			nums:     []int{1, 1, 1},
 			k:        2,
