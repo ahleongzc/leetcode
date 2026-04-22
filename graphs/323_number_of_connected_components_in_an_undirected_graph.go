@@ -33,48 +33,61 @@ func countComponentsDFS(n int, edges [][]int) int {
 	return output
 }
 
-func CountComponents(n int, edges [][]int) int {
-	parent := make(map[int]int)
-	rank := make(map[int]int)
+type countComponentsUF struct {
+	rank map[int]int
+	rep  map[int]int
+}
+
+func (c *countComponentsUF) find(node int) int {
+	if c.rep[node] == node {
+		return node
+	}
+	c.rep[node] = c.find(c.rep[node])
+	return c.rep[node]
+}
+
+func (c *countComponentsUF) union(nodeA, nodeB int) bool {
+	repA, repB := c.find(nodeA), c.find(nodeB)
+	if repA == repB {
+		return false
+	}
+
+	if c.rank[repA] > c.rank[repB] {
+		c.rep[repB] = repA
+	} else if c.rank[repB] > c.rank[repA] {
+		c.rep[repA] = repB
+	} else {
+		c.rep[repA] = repB
+		c.rank[repB]++
+	}
+
+	return true
+}
+
+func newCountComponentsUF(n int) *countComponentsUF {
+	uf := &countComponentsUF{
+		rep:  make(map[int]int),
+		rank: make(map[int]int),
+	}
 
 	for i := range n {
-		parent[i] = i
-		rank[i] = 0
+		uf.rep[i] = i
+		uf.rank[i] = 0
 	}
 
-	find := func(i int) int {
-		p := parent[i]
-		for p != parent[p] {
-			parent[p] = parent[parent[p]]
-			p = parent[p]
-		}
-		return p
-	}
+	return uf
+}
 
-	union := func(a, b int) {
-		parentA, parentB := find(a), find(b)
-		if parentA == parentB {
-			return
-		}
-
-		if rank[parentA] > rank[parentB] {
-			parent[parentB] = parentA
-		} else {
-			parent[parentA] = parentB
-			rank[parentA]++
-		}
-	}
-
+func countComponentsUnionFind(n int, edges [][]int) int {
+	uf := newCountComponentsUF(n)
 	for _, edge := range edges {
-		union(edge[0], edge[1])
-		union(edge[1], edge[0])
+		uf.union(edge[0], edge[1])
 	}
 
-	uniqueSet := make(map[int]struct{})
-
+	uniqueRep := make(map[int]struct{})
 	for i := range n {
-		uniqueSet[find(i)] = struct{}{}
+		uniqueRep[uf.find(i)] = struct{}{}
 	}
 
-	return len(uniqueSet)
+	return len(uniqueRep)
 }

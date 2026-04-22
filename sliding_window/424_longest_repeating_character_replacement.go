@@ -1,34 +1,20 @@
 package slidingwindow
 
-// A B B B B
-// L
-//     R
+import "slices"
 
-func CharacterReplacement(s string, k int) int {
-	countMap := make(map[byte]int)
-	left, right := 0, 0
-	count := 0
+func characterReplacement(s string, k int) int {
+	charCount := make([]int, 26)
+	longestSubstringLength := 0
+	left := 0
 
-	for right < len(s) {
-		countMap[s[right]]++
-
-		if (right-left+1)-findLargest(countMap) > k {
-			countMap[s[left]]--
+	for right, char := range s {
+		charCount[int(char)%26]++
+		for (right-left+1)-slices.Max(charCount) > k {
+			charCount[int(s[left])%26]--
 			left++
 		}
-
-		count = max(right-left+1, count)
-		right++
+		longestSubstringLength = max(longestSubstringLength, right-left+1)
 	}
 
-	return count
-}
-
-func findLargest(countMap map[byte]int) int {
-	res := 0
-	for _, v := range countMap {
-		res = max(res, v)
-	}
-
-	return res
+	return longestSubstringLength
 }

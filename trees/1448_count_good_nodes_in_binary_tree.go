@@ -1,28 +1,21 @@
 package trees
 
-func GoodNodes(root *TreeNode) int {
-	if root == nil {
-		return 0
-	}
-
-	res := 1
-
-	var dfs func(node *TreeNode, prev int)
-	dfs = func(node *TreeNode, prev int) {
-		if node == nil {
+func goodNodes(root *TreeNode) int {
+	res := 0
+	var dfs func(root *TreeNode, prev int)
+	dfs = func(root *TreeNode, prev int) {
+		if root == nil {
 			return
 		}
-
-		if node.Val >= prev {
+		if root.Val >= prev {
 			res++
 		}
 
-		dfs(node.Left, max(node.Val, prev))
-		dfs(node.Right, max(node.Val, prev))
+		next := max(root.Val, prev)
+		dfs(root.Left, next)
+		dfs(root.Right, next)
 	}
 
-	dfs(root.Left, root.Val)
-	dfs(root.Right, root.Val)
-
+	dfs(root, root.Val-1)
 	return res
 }
